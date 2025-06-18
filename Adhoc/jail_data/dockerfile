@@ -1,0 +1,21 @@
+# Slim official Python Image
+FROM python:alpine
+
+# Set working dir inside the container
+WORKDIR /app
+
+# Copy only requirements.txt first
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy rest of app
+COPY . .
+
+# Set env variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# run notebook
+CMD ["python", "jail_data.py"]
